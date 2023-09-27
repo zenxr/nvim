@@ -16,6 +16,7 @@ return {
     filters = {
       dotfiles = true,
     },
+    disable_netrw = true,
     -- here down can safely be removed, just fancy floating file tree
     view = {
       float = {

@@ -49,6 +49,13 @@ vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
 
+vim.opt.listchars = {
+  eol = '⏎',
+  tab = '␉·',
+  trail = '␠',
+  nbsp = '⎵',
+}
+
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -134,16 +141,16 @@ require('lazy').setup({
 
         -- don't override the built-in and fugitive keymaps
         local gs = package.loaded.gitsigns
-        vim.keymap.set({'n', 'v'}, ']c', function()
+        vim.keymap.set({ 'n', 'v' }, ']c', function()
           if vim.wo.diff then return ']c' end
           vim.schedule(function() gs.next_hunk() end)
           return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to next hunk"})
-        vim.keymap.set({'n', 'v'}, '[c', function()
+        end, { expr = true, buffer = bufnr, desc = "Jump to next hunk" })
+        vim.keymap.set({ 'n', 'v' }, '[c', function()
           if vim.wo.diff then return '[c' end
           vim.schedule(function() gs.prev_hunk() end)
           return '<Ignore>'
-        end, {expr=true, buffer = bufnr, desc = "Jump to previous hunk"})
+        end, { expr = true, buffer = bufnr, desc = "Jump to previous hunk" })
       end,
     },
   },
@@ -184,7 +191,7 @@ require('lazy').setup({
   },
 
   -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
+  { 'numToStr/Comment.nvim',  opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
   {
@@ -204,7 +211,16 @@ require('lazy').setup({
           return vim.fn.executable 'make' == 1
         end,
       },
+      {
+        "nvim-telescope/telescope-live-grep-args.nvim",
+        -- This will not install any breaking changes.
+        -- For major updates, this must be adjusted manually.
+        version = "^1.0.0",
+      },
     },
+    config = function()
+      require("telescope").load_extension('live_grep_args')
+    end
   },
 
   {
@@ -324,9 +340,16 @@ vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc = '[S]earch [T]ext' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args<cr>', { desc = '[S]earch [G]rep' })
+vim.keymap.set('n', '<leader>sc', '<cmd>Telescope live_grep cwd=$HOME/Programming/personal/dotfiles/cheatsheets<cr>',
+  { desc = '[S]earch [C]heatsheets' })
+vim.keymap.set('n', '<leader>sn', '<cmd>Telescope live_grep cwd=$HOME/Documents/obsidian<cr>',
+  { desc = '[S]earch [N]otes' })
+vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=$HOME/Documents/obsidian/daily<cr>',
+  { desc = '[S]earch [D]aily notes' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -546,18 +569,17 @@ vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
-vim.opt.smartindent = true
-vim.opt.smarttab = true
+-- vim.opt.smartindent = true
+-- vim.opt.smarttab = true
 vim.opt.textwidth = 80
 
-vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', {desc = 'Fugitive'})
+vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
-vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save', noremap = true})
-vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format'})
-
+vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save', noremap = true })
+vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
 require('catppuccin').setup({
   transparent_background = true,
   styles = {
