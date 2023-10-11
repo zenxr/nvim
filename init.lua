@@ -42,19 +42,32 @@ P.S. You can delete this when you're done too. It's your config now :)
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+-- The wildmode setting allows you to customize the way that Vim handles
+-- tab-completion at the command prompt.
+-- This is somewhat close to bash
+vim.opt.wildmode = "list:longest,list:full"
 
+-- netrw opens BROWSER rather than system default
+vim.g.netrw_browsex_viewer = os.getenv("BROWSER") or "chromium"
 -- disable netrw file browser for nvim-tree
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 -- set termguicolors to enable highlight groups
 vim.opt.termguicolors = true
+-- new splits default to right & bottom
+vim.opt.splitbelow = true
+vim.opt.splitright = true
 
-vim.opt.listchars = {
-  eol = '⏎',
-  tab = '␉·',
-  trail = '␠',
-  nbsp = '⎵',
-}
+-- Useful for showing unwanted whitespace chars
+-- vim.opt.listchars = {
+--   eol = '⏎',
+--   tab = '␉·',
+--   trail = '␠',
+--   nbsp = '⎵',
+-- }
+
+-- line wrap is for suckers, don't make long lines
+vim.opt.wrap = false
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -83,6 +96,7 @@ require('lazy').setup({
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  'shumphrey/fugitive-gitlab.vim',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -99,7 +113,7 @@ require('lazy').setup({
 
       -- Useful status updates for LSP
       -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-      { 'j-hui/fidget.nvim', tag = 'legacy', opts = {} },
+      { 'j-hui/fidget.nvim',       tag = 'legacy', opts = {} },
 
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
@@ -163,7 +177,7 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
-  { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+  { "catppuccin/nvim",      name = "catppuccin", priority = 1000 },
 
   {
     -- Set lualine as statusline
@@ -186,7 +200,7 @@ require('lazy').setup({
     -- See `:help indent_blankline.txt`
     opts = {
       char = '┊',
-      show_trailing_blankline_indent = false,
+      show_trailing_blankline_indent = true,
     },
   },
 
@@ -217,9 +231,14 @@ require('lazy').setup({
         -- For major updates, this must be adjusted manually.
         version = "^1.0.0",
       },
+      {
+        -- this is pretty neat, try :Telescope docker
+        "lpoto/telescope-docker.nvim"
+      }
     },
     config = function()
       require("telescope").load_extension('live_grep_args')
+      require("telescope").load_extension('docker')
     end
   },
 
@@ -230,6 +249,16 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+  },
+  {
+    'akinsho/bufferline.nvim',
+    lazy = false,
+    dependencies = {
+      'nvim-tree/nvim-web-devicons'
+    },
+    config = function()
+      require('bufferline').setup()
+    end
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -283,6 +312,7 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
+-- Shows even if only one completion, and no select by default
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
@@ -320,6 +350,22 @@ require('telescope').setup {
       },
     },
   },
+
+  pickers = {
+    find_files = {
+      hidden = true,
+    },
+    live_grep = {
+      additional_args = { "--hidden" }
+    }
+  },
+  -- Default configuration for builtin pickers goes here:
+  -- picker_name = {
+  --   picker_config_key = value,
+  --   ...
+  -- }
+  -- Now the picker_config_key will be applied every time you call this
+  -- builtin picker
 }
 
 -- Enable telescope fzf native, if installed
@@ -341,6 +387,7 @@ vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc = '[S]earch [T]ext' })
+-- vim.keymap.set('n', '<leader>st', '<cmd>Telescope live_grep find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>', { desc = '[S]earch [T]ext' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args<cr>', { desc = '[S]earch [G]rep' })
@@ -355,7 +402,8 @@ vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=$HOME/Documents/
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
+    'sql' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -451,6 +499,7 @@ local on_attach = function(_, bufnr)
   nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
+  -- note pressing K again will go into the popup
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
   nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
@@ -458,15 +507,20 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
+  -- nmap('<leader>wl', function()
+  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, '[W]orkspace [L]ist Folders')
 
   -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
+  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+  --   vim.lsp.buf.format()
+  -- end, { desc = 'Format current buffer with LSP' })
 end
+
+vim.api.nvim_create_user_command('Format', function(_)
+  vim.lsp.buf.format()
+end, { desc = 'Format current buffer with LSP' })
+
 
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -592,7 +646,28 @@ require('catppuccin').setup({
     treesitter = true
   }
 })
+vim.keymap.set('n', '<leader>gt', '<cmd>tabnext<cr>', { desc = '[G]oto [T]ab' })
+vim.keymap.set('n', '<leader>bb', '<cmd>bprev<cr>', { desc = '[B]uffer [B]ack' })
+vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = '[B]uffer [N]ext' })
 
 vim.cmd.colorscheme 'catppuccin'
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+--
+
+-- vim.api.nvim_create_user_command("Format", function(args)
+--   local range = nil
+--   if args.count ~= -1 then
+--     local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+--     range = {
+--       start = { args.line1, 0 },
+--       ["end"] = { args.line2, end_line:len() },
+--     }
+--   end
+--   require("conform").format({ async = true, lsp_fallback = true, range = range })
+-- end, { range = true })
+--
+vim.keymap.set('v', '<leader>as', '<Plug>(EasyAlign)*<Space><CR>', { desc = '[A]lign [S]pace'} )
+vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [C]omma'} )
+vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able'} )
+

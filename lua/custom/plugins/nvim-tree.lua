@@ -1,5 +1,5 @@
-local HEIGHT_RATIO = 0.8 -- You can change this
-local WIDTH_RATIO = 0.5  -- You can change this too
+local HEIGHT_RATIO = 0.8
+local WIDTH_RATIO = 0.5
 
 return {
   "nvim-tree/nvim-tree.lua",
@@ -13,10 +13,16 @@ return {
     "nvim-tree/nvim-web-devicons",
   },
   config = {
+    update_focused_file = {
+      enable = true
+    },
     filters = {
       dotfiles = true,
     },
-    disable_netrw = true,
+    -- re-enabled netrw, against plugin advice
+    -- because i like `gx` to open links
+    -- disable_netrw = true,
+    -- 
     -- here down can safely be removed, just fancy floating file tree
     view = {
       float = {

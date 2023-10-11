@@ -5,7 +5,8 @@
 
 return {
   "johnfrankmorgan/whitespace.nvim",
-   config = {
+  cond = false,
+  config = {
             -- configuration options and their defaults
 
             -- `highlight` configures which highlight is used to display
