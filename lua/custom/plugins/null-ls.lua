@@ -11,8 +11,39 @@ return {
         null_ls.builtins.formatting.black,
         null_ls.builtins.diagnostics.shellcheck,
         null_ls.builtins.diagnostics.pylint,
-        null_ls.builtins.formatting.sql_formatter.with { command = { "sql-formatter"}, extra_args = { '--config', '/home/code/.config/sql-formatter/config.json'}, filetypes = { "sql" }},
-      }
+        -- pgformatter > sqlformat > sql-formatter
+        null_ls.builtins.formatting.pg_format.with({
+          -- https://github.com/darold/pgFormatter
+          command = { "pg_format" },
+          extra_args = {
+            '--comma-start',
+            '--wrap-comment',
+            '--function-case', '1',
+            '--type-case', '1',
+            '--keyword-case', '1',
+          },
+          filetypes = { "sql" },
+        }),
+        -- notice: pgcli requires sqlformat, it's likely already on path
+        -- null_ls.builtins.formatting.sqlformat.with({
+        --   -- only_local = vim.fn.expand("~/.local/bin"),
+        --   command = { "sqlformat" },
+        --   extra_args = {
+        --     '--keywords', 'lower',
+        --     '--identifiers', 'lower',
+        --     '--reindent',
+        --     '--comma_first', 'True',
+        --     '--indent_columns'
+        --   },
+        --   filetypes = { "sql" }
+        -- })
+        -- null_ls.builtins.formatting.sql_formatter.with(
+        --  {
+        --    command = { "sql-formatter"},
+        --    extra_args = { '--config', '/home/code/.config/sql-formatter/config.json'},
+        --    filetypes = { "sql" }
+        --  }),
+      },
     })
   end
 }
