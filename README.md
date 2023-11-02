@@ -1,6 +1,7 @@
 This is my neovim config, obviously starting from kickstart.nvim.
 
-I've left the default README below.
+I've left the default README below, outside of pointing installation
+instructions to this repository.
 
 # kickstart.nvim
 
@@ -18,9 +19,6 @@ A starting point for Neovim that is:
 This repo is meant to be used by **YOU** to begin your Neovim journey; remove the things you don't use and add what you miss.
 
 Kickstart.nvim targets *only* the latest ['stable'](https://github.com/neovim/neovim/releases/tag/stable) and latest ['nightly'](https://github.com/neovim/neovim/releases/tag/nightly) of Neovim. If you are experiencing issues, please make sure you have the latest versions.
-
-Distribution Alternatives:
-- [LazyVim](https://www.lazyvim.org/): A delightful distribution maintained by @folke (the author of lazy.nvim, the package manager used here)
 
 ### Installation
 
@@ -44,9 +42,9 @@ Clone kickstart.nvim:
 
 ```sh
 # on Linux and Mac
-git clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
+git clone https://github.com/zenxr/nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 # on Windows
-git clone https://github.com/nvim-lua/kickstart.nvim.git %userprofile%\AppData\Local\nvim\ 
+git clone https://github.com/zenxr/nvim.git %userprofile%\AppData\Local\nvim\ 
 ```
 
 ### Post Installation
@@ -66,74 +64,14 @@ nvim --headless "+Lazy! sync" +qa
 
 ### Configuration And Extension
 
-* Inside of your copy, feel free to modify any file you like! It's your copy!
 * Feel free to change any of the default options in `init.lua` to better suit your needs.
-* For adding plugins, there are 3 primary options:
-  * Add new configuration in `lua/custom/plugins/*` files, which will be auto sourced using `lazy.nvim` (uncomment the line importing the `custom/plugins` directory in the `init.lua` file to enable this)
-  * Modify `init.lua` with additional plugins.
-  * Include the `lua/kickstart/plugins/*` files in your configuration.
+* See `lua/custom/plugins/*` for plugin installation
 
 You can also merge updates/changes from the repo back into your fork, to keep up-to-date with any changes for the default configuration.
 
 #### Example: Adding an autopairs plugin
 
 In the file: `lua/custom/plugins/autopairs.lua`, add:
-
-```lua
--- File: lua/custom/plugins/autopairs.lua
-
-return {
-  "windwp/nvim-autopairs",
-  -- Optional dependency
-  dependencies = { 'hrsh7th/nvim-cmp' },
-  config = function()
-    require("nvim-autopairs").setup {}
-    -- If you want to automatically add `(` after selecting a function or method
-    local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-    local cmp = require('cmp')
-    cmp.event:on(
-      'confirm_done',
-      cmp_autopairs.on_confirm_done()
-    )
-  end,
-}
-```
-
-
-This will automatically install [windwp/nvim-autopairs](https://github.com/windwp/nvim-autopairs) and enable it on startup. For more information, see documentation for [lazy.nvim](https://github.com/folke/lazy.nvim).
-
-#### Example: Adding a file tree plugin
-
-In the file: `lua/custom/plugins/filetree.lua`, add:
-
-```lua
--- Unless you are still migrating, remove the deprecated commands from v1.x
-vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-
-return {
-  "nvim-neo-tree/neo-tree.nvim",
-  version = "*",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-    "MunifTanjim/nui.nvim",
-  },
-  config = function ()
-    require('neo-tree').setup {}
-  end,
-}
-```
-
-This will install the tree plugin and add the command `:Neotree` for you. You can explore the documentation at [neo-tree.nvim](https://github.com/nvim-neo-tree/neo-tree.nvim) for more information.
-
-### Contribution
-
-Pull-requests are welcome. The goal of this repo is not to create a Neovim configuration framework, but to offer a starting template that shows, by example, available features in Neovim. Some things that will not be included:
-
-* Custom language server configuration (null-ls templates)
-* Theming beyond a default colorscheme necessary for LSP highlight groups
-
-Each PR, especially those which increase the line count, should have a description as to why the PR is necessary.
 
 ### FAQ
 
