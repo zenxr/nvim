@@ -401,7 +401,7 @@ vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=$HOME/Documents/
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   -- alternative, manual install ==> :TSInstall markdown
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'sql', 'markdown', 'markdown_inline' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'json', 'javascript', 'typescript', 'vimdoc', 'vim', 'sql', 'markdown', 'markdown_inline' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -533,6 +533,7 @@ local servers = {
   -- gopls = {},
   pyright = {},
   rust_analyzer = {},
+  jsonls = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
