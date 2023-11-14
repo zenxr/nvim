@@ -1,3 +1,8 @@
+-- consts
+local cheatsheets_dir = '$HOME/Programming/personal/dotfiles/cheatsheets'
+local obsidian_dir = '$HOME/Documents/obsidian'
+local obsidian_daily_dir = '$HOME/Documents/obsidian/daily'
+
 --[[
 
 =====================================================================
@@ -57,6 +62,8 @@ vim.opt.termguicolors = true
 -- new splits default to right & bottom
 vim.opt.splitbelow = true
 vim.opt.splitright = true
+-- maintain 8 lines around buffer at all times
+vim.opt.scrolloff = 8
 
 -- Useful for showing unwanted whitespace chars
 -- vim.opt.listchars = {
@@ -390,10 +397,16 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args<cr>', { desc = '[S]earch [G]rep' })
 vim.keymap.set('n', '<leader>sc', '<cmd>Telescope live_grep cwd=$HOME/Programming/personal/dotfiles/cheatsheets<cr>',
+local new_daily_note = function()
+  return os.date("%Y-%m-%d.md")
+end
+vim.keymap.set('n', '<leader>dn', '<cmd>tabnew ' .. obsidian_daily_dir .. '/' .. new_daily_note() .. '<cr>',
+  { desc = 'open [D]aily [N]ote' })
+vim.keymap.set('n', '<leader>sc', '<cmd>Telescope live_grep cwd=' .. cheatsheets_dir .. '<cr>',
   { desc = '[S]earch [C]heatsheets' })
-vim.keymap.set('n', '<leader>sn', '<cmd>Telescope live_grep cwd=$HOME/Documents/obsidian<cr>',
+vim.keymap.set('n', '<leader>sn', '<cmd>Telescope live_grep cwd=' .. obsidian_dir .. '<cr>',
   { desc = '[S]earch [N]otes' })
-vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=$HOME/Documents/obsidian/daily<cr>',
+vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=' .. obsidian_daily_dir .. '<cr>',
   { desc = '[S]earch [D]aily notes' })
 
 -- [[ Configure Treesitter ]]
@@ -670,3 +683,4 @@ vim.keymap.set('v', '<leader>as', '<Plug>(EasyAlign)*<Space><CR>', { desc = '[A]
 vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [C]omma'} )
 vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able'} )
 
+vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
