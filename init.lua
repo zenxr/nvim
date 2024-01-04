@@ -1,8 +1,3 @@
--- consts
-local cheatsheets_dir = '$HOME/Programming/personal/dotfiles/cheatsheets'
-local obsidian_dir = '$HOME/Documents/obsidian'
-local obsidian_daily_dir = '$HOME/Documents/obsidian/daily'
-
 --[[
 
 =====================================================================
@@ -42,39 +37,13 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
--- The wildmode setting allows you to customize the way that Vim handles
--- tab-completion at the command prompt.
--- This is somewhat close to bash
-vim.opt.wildmode = "list:longest,list:full"
-
--- netrw opens BROWSER rather than system default
-vim.g.netrw_browsex_viewer = os.getenv("BROWSER") or "chromium"
--- disable netrw file browser for nvim-tree
--- vim.g.loaded_netrw = 1
--- vim.g.loaded_netrwPlugin = 1
--- set termguicolors to enable highlight groups
-vim.opt.termguicolors = true
--- new splits default to right & bottom
-vim.opt.splitbelow = true
-vim.opt.splitright = true
--- maintain 8 lines around buffer at all times
-vim.opt.scrolloff = 8
-
--- Useful for showing unwanted whitespace chars
--- vim.opt.listchars = {
---   eol = '⏎',
---   tab = '␉·',
---   trail = '␠',
---   nbsp = '⎵',
--- }
-
--- line wrap is for suckers, don't make long lines
-vim.opt.wrap = false
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -281,58 +250,6 @@ require('lazy').setup({
   { import = 'custom.plugins' },
 }, {})
 
--- [[ Setting options ]]
--- See `:help vim.o`
--- NOTE: You can change these options as you wish!
-
--- Set highlight on search
-vim.o.hlsearch = true
-
--- Make line numbers default
-vim.wo.number = true
-
--- Enable mouse mode
-vim.o.mouse = 'a'
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
-
--- Enable break indent
-vim.o.breakindent = true
-
--- Save undo history
-vim.o.undofile = true
-
--- Case-insensitive searching UNLESS \C or capital in search
-vim.o.ignorecase = true
-vim.o.smartcase = true
-
--- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
-
--- Decrease update time
-vim.o.updatetime = 250
-vim.o.timeoutlen = 300
-
--- Set completeopt to have a better completion experience
--- Shows even if only one completion, and no select by default
-vim.o.completeopt = 'menuone,noselect'
-
--- NOTE: You should make sure your terminal supports this
-vim.o.termguicolors = true
-
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -376,45 +293,14 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc = '[S]earch [T]ext' })
--- vim.keymap.set('n', '<leader>st', '<cmd>Telescope live_grep find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>', { desc = '[S]earch [T]ext' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args<cr>', { desc = '[S]earch [G]rep' })
-vim.keymap.set('n', '<leader>sc', '<cmd>Telescope live_grep cwd=$HOME/Programming/personal/dotfiles/cheatsheets<cr>',
-local new_daily_note = function()
-  return os.date("%Y-%m-%d.md")
-end
-vim.keymap.set('n', '<leader>dn', '<cmd>tabnew ' .. obsidian_daily_dir .. '/' .. new_daily_note() .. '<cr>',
-  { desc = 'open [D]aily [N]ote' })
-vim.keymap.set('n', '<leader>sc', '<cmd>Telescope live_grep cwd=' .. cheatsheets_dir .. '<cr>',
-  { desc = '[S]earch [C]heatsheets' })
-vim.keymap.set('n', '<leader>sn', '<cmd>Telescope live_grep cwd=' .. obsidian_dir .. '<cr>',
-  { desc = '[S]earch [N]otes' })
-vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=' .. obsidian_daily_dir .. '<cr>',
-  { desc = '[S]earch [D]aily notes' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   -- alternative, manual install ==> :TSInstall markdown
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'json', 'javascript', 'typescript', 'vimdoc', 'vim', 'sql', 'markdown', 'markdown_inline' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'json', 'javascript', 'typescript', 'vimdoc',
+    'vim', 'sql', 'markdown', 'markdown_inline' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -476,11 +362,6 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- [[ Configure LSP ]]
 --  This function gets run when an LSP connects to a particular buffer.
@@ -518,14 +399,6 @@ local on_attach = function(_, bufnr)
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
   nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
   nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  -- nmap('<leader>wl', function()
-  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  -- end, '[W]orkspace [L]ist Folders')
-
-  -- Create a command `:Format` local to the LSP buffer
-  -- vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-  --   vim.lsp.buf.format()
-  -- end, { desc = 'Format current buffer with LSP' })
 end
 
 vim.api.nvim_create_user_command('Format', function(_)
@@ -630,57 +503,5 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
-vim.opt.colorcolumn = "80"
-vim.opt.relativenumber = true
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
--- vim.opt.smartindent = true
--- vim.opt.smarttab = true
-vim.opt.textwidth = 80
 
-vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
-vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save', noremap = true })
-vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
-require('catppuccin').setup({
-  transparent_background = true,
-  styles = {
-    comments = { "italic" },
-  },
-  integrations = {
-    cmp = true,
-    gitsigns = true,
-    nvimtree = true,
-    treesitter = true
-  }
-})
-vim.keymap.set('n', '<leader>gt', '<cmd>tabnext<cr>', { desc = '[G]oto [T]ab' })
-vim.keymap.set('n', '<leader>bb', '<cmd>bprev<cr>', { desc = '[B]uffer [B]ack' })
-vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = '[B]uffer [N]ext' })
-
-vim.cmd.colorscheme 'catppuccin'
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
---
-
--- vim.api.nvim_create_user_command("Format", function(args)
---   local range = nil
---   if args.count ~= -1 then
---     local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
---     range = {
---       start = { args.line1, 0 },
---       ["end"] = { args.line2, end_line:len() },
---     }
---   end
---   require("conform").format({ async = true, lsp_fallback = true, range = range })
--- end, { range = true })
---
-vim.keymap.set('v', '<leader>as', '<Plug>(EasyAlign)*<Space><CR>', { desc = '[A]lign [S]pace'} )
-vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [C]omma'} )
-vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able'} )
-
-vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
+require("zenxr")
