@@ -71,6 +71,8 @@ vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [
 vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able' })
 
 vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
+-- CLipboard
+vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[y]ank to sysclip', noremap = true, silent = true })
 vim.keymap.set("n", '<leader>Y', [["+Y"]], { desc = '[Y]ank eol to sysclip' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dP', { desc = '[p]aste without yanking', noremap = true, silent = true })
 
