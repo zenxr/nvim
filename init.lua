@@ -420,7 +420,7 @@ local servers = {
   pyright = {},
   rust_analyzer = {},
   jsonls = {},
-  -- tsserver = {},
+  tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
