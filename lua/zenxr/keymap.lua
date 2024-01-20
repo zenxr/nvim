@@ -23,7 +23,6 @@ vim.keymap.set('n', '<leader>/', function()
     previewer = false,
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
-
 -- vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
@@ -54,38 +53,43 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
+-- Split navigation
 vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
 vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
 vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
 vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
 vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save', noremap = true })
-vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
 
+-- Buffers and tabs
 vim.keymap.set('n', '<leader>gt', '<cmd>tabnext<cr>', { desc = '[G]oto [T]ab' })
 vim.keymap.set('n', '<leader>bb', '<cmd>bprev<cr>', { desc = '[B]uffer [B]ack' })
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = '[B]uffer [N]ext' })
+vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
 
+-- Easy Align
 vim.keymap.set('v', '<leader>as', '<Plug>(EasyAlign)*<Space><CR>', { desc = '[A]lign [S]pace' })
 vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [C]omma' })
 vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able' })
 
-vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
 -- CLipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[y]ank to sysclip', noremap = true, silent = true })
 vim.keymap.set("n", '<leader>Y', [["+Y"]], { desc = '[Y]ank eol to sysclip' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dP', { desc = '[p]aste without yanking', noremap = true, silent = true })
 
-local wk = require("which-key")
+-- Fugitive
+vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
 
+-- Formatting
+vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
+
+-- Just just whichkey titles
+local wk = require("which-key")
 wk.register({
   ["<leader>s"] = { name = "+search" },
 })
-
 wk.register({
   ["<leader>b"] = { name = "+buffers" },
 })
-
 wk.register({
   ["<leader>j"] = { name = "+harpoon" }
 })

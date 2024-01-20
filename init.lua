@@ -278,7 +278,7 @@ require('telescope').setup {
       hidden = true,
     },
     live_grep = {
-      additional_args = { "--hidden" }
+      additional_args = { "--hidden", "-g", "!.git/" }
     }
   },
   -- Default configuration for builtin pickers goes here:
