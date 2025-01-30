@@ -20,12 +20,12 @@ vim.opt.splitright = true
 vim.opt.scrolloff = 8
 
 -- Useful for showing unwanted whitespace chars
--- vim.opt.listchars = {
---   eol = '⏎',
---   tab = '␉·',
---   trail = '␠',
---   nbsp = '⎵',
--- }
+vim.opt.listchars = {
+  eol = '⏎',
+  tab = '␉·',
+  trail = '␠',
+  nbsp = '⎵',
+}
 
 -- line wrap is for suckers, don't make long lines
 vim.opt.wrap = false
@@ -73,11 +73,19 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "120"
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.expandtab = true
 -- vim.opt.smartindent = true
 -- vim.opt.smarttab = true
-vim.opt.textwidth = 80
+vim.opt.textwidth = 120
+
+vim.opt.foldmethod = "expr"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.opt.foldcolumn = "0"
+-- vim.opt.foldtext = ""
+vim.opt.foldlevel = 99
+vim.opt.foldlevelstart = 9
+vim.opt.foldnestmax = 4

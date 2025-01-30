@@ -85,9 +85,26 @@ vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dP', { desc = '[p]aste without yank
 
 -- Fugitive
 vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
+vim.keymap.set('n', '<leader>gl', '<cmd>diffget //2<CR>', { noremap = true , desc = 'Diff get left (buf2)'})
+vim.keymap.set('n', '<leader>gr', '<cmd>diffget //3<CR>', { noremap = true , desc = 'Diff get right (buf3)'})
 
 -- Formatting
 vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
+
+local format_selection = function()
+  vim.lsp.buf.format({
+    async = true,
+    range = {
+      ["start"] = vim.api.nvim_buf_get_mark(0, "<"),
+      ["end"] = vim.api.nvim_buf_get_mark(0, ">"),
+    }
+  })
+end
+vim.keymap.set('v', '<leader>lf', format_selection, { desc = 'Format selection'})
+
+-- Aerial for Treelike symbols layout
+-- vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+vim.keymap.set("n", '<leader>dt', "<cmd>AerialToggle!<CR>", { desc = '[D]ocument Symbol [T]ree' })
 
 -- Just just whichkey titles
 local wk = require("which-key")

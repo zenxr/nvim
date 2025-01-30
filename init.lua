@@ -109,11 +109,14 @@ require('lazy').setup({
 
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+
+      -- vscode-like pictograms to neovim lsp
+      'onsails/lspkind.nvim',
     },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
@@ -153,8 +156,10 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
-  { "catppuccin/nvim",      name = "catppuccin", priority = 1000 },
-
+  { "catppuccin/nvim",       name = "catppuccin", priority = 1000 },
+  { "rose-pine/neovim",      name = "rose-pine" },
+  { "rebelot/kanagawa.nvim", name = "kanagawa" },
+  { "folke/tokyonight.nvim", name = "tokyonight", priority = 1000 },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -162,7 +167,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'onedark',
+        theme = 'rose-pine',
         component_separators = '|',
         section_separators = '',
       },
@@ -175,7 +180,7 @@ require('lazy').setup({
     main = "ibl",
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    opts = {},
+    opts = {enabled=false},
   },
 
   -- "gc" to comment visual regions/lines
@@ -231,7 +236,8 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons'
     },
     config = function()
-      require('bufferline').setup()
+      local highlights = require('rose-pine.plugins.bufferline')
+      require('bufferline').setup({ highlights = highlights })
     end
   },
 
@@ -276,6 +282,8 @@ require('telescope').setup {
   pickers = {
     find_files = {
       hidden = true,
+      find_command={ 'rg', '-g', '!.git/', '--hidden', '--files'},
+      -- rg,--ignore,--hidden,--files
     },
     live_grep = {
       additional_args = { "--hidden", "-g", "!.git/" }
@@ -300,7 +308,7 @@ require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
   -- alternative, manual install ==> :TSInstall markdown
   ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'json', 'javascript', 'typescript', 'vimdoc',
-    'vim', 'sql', 'markdown', 'markdown_inline' },
+    'vim', 'sql', 'markdown', 'markdown_inline', 'bash', 'css', 'html', 'toml' },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -393,7 +401,7 @@ local on_attach = function(_, bufnr)
   -- See `:help K` for why this keymap
   -- note pressing K again will go into the popup
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<C-K>', vim.lsp.buf.signature_help, 'Signature Help')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -462,6 +470,7 @@ local cmp = require 'cmp'
 local luasnip = require 'luasnip'
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
+local lspkind = require 'lspkind'
 
 cmp.setup {
   snippet = {
@@ -502,6 +511,17 @@ cmp.setup {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
+
+  formatting = {
+    format = lspkind.cmp_format({
+      mode = 'symbol', -- show only symbol annotations
+      maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+                     -- can also be a function to dynamically calculate max width such as 
+                     -- maxwidth = function() return math.floor(0.45 * vim.o.columns) end,
+      ellipsis_char = '...', -- when popup menu exceed maxwidth, the truncated part would show ellipsis_char instead (must define maxwidth first)
+      show_labelDetails = true, -- show labelDetails in menu. Disabled by default
+    })
+  }
 }
 
 require("zenxr")

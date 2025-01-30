@@ -10,7 +10,14 @@ return {
       sources = {
         null_ls.builtins.formatting.black,
         null_ls.builtins.diagnostics.shellcheck,
-        null_ls.builtins.diagnostics.pylint,
+        -- fix eslint issues, ignore broken rules
+        null_ls.builtins.code_actions.eslint_d,
+        -- typescript, javascript formatter
+        null_ls.builtins.formatting.prettierd,
+        -- null_ls.builtins.formatting.prettierd.with({
+        --   filetypes = { "javascript","typescript","css","scss","html","json","yaml","markdown","graphql","md","txt" }
+        -- }),
+        -- null_ls.builtins.diagnostics.pylint,
         -- pgformatter > sqlformat > sql-formatter
         null_ls.builtins.formatting.pg_format.with({
           -- https://github.com/darold/pgFormatter
