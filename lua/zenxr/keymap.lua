@@ -31,20 +31,27 @@ vim.keymap.set('n', '<leader>st', require('telescope.builtin').live_grep, { desc
 -- vim.keymap.set('n', '<leader>st', '<cmd>Telescope live_grep find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>', { desc = '[S]earch [T]ext' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
-vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args<cr>', { desc = '[S]earch [G]rep' })
+vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args prompt_prefix=ripgrep> <cr>',
+  { desc = '[S]earch [G]rep' })
 vim.keymap.set('n', '<leader>gfv', '<cmd>vsplit | lua vim.lsp.buf.definition()<cr>', { desc = 'Definition vsplit' })
 vim.keymap.set('n', '<leader>gfh', '<cmd>split | lua vim.lsp.buf.definition()<cr>', { desc = 'Definition split' })
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps'})
+vim.keymap.set('n', '<leader>sC', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands'})
+vim.keymap.set('n', '<leader>sz', require('telescope.builtin').colorscheme, { desc = '[S]earch colorschemes'})
+vim.keymap.set('n', '<leader>ti', '<cmd>IBLToggle<cr>', { desc = '[T]oggle [I]BL'})
 
 local new_daily_note = function()
   return os.date("%Y-%m-%d.md")
 end
 vim.keymap.set('n', '<leader>dn', '<cmd>tabnew ' .. obsidian_daily_dir .. '/' .. new_daily_note() .. '<cr>',
   { desc = 'open [D]aily [N]ote' })
-vim.keymap.set('n', '<leader>sc', '<cmd>Telescope live_grep cwd=' .. cheatsheets_dir .. '<cr>',
+vim.keymap.set('n', '<leader>sc',
+  '<cmd>Telescope live_grep cwd=' .. cheatsheets_dir .. ' prompt_prefix=cheatsheets> <cr>',
   { desc = '[S]earch [C]heatsheets' })
-vim.keymap.set('n', '<leader>sn', '<cmd>Telescope live_grep cwd=' .. obsidian_dir .. '<cr>',
+vim.keymap.set('n', '<leader>sn', '<cmd>Telescope live_grep cwd=' .. obsidian_dir .. ' prompt_prefix=notes> <cr>',
   { desc = '[S]earch [N]otes' })
-vim.keymap.set('n', '<leader>sd', '<cmd>Telescope live_grep cwd=' .. obsidian_daily_dir .. '<cr>',
+vim.keymap.set('n', '<leader>sd',
+  '<cmd>Telescope live_grep cwd=' .. obsidian_daily_dir .. 'prompt_prefix=daily_notes> <cr>',
   { desc = '[S]earch [D]aily notes' })
 
 -- Diagnostic keymaps
