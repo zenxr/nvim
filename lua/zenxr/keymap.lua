@@ -84,12 +84,6 @@ vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
 
 -- Just just whichkey titles
 local wk = require("which-key")
-wk.register({
-  ["<leader>s"] = { name = "+search" },
-})
-wk.register({
-  ["<leader>b"] = { name = "+buffers" },
-})
-wk.register({
-  ["<leader>j"] = { name = "+harpoon" }
-})
+wk.add({ "<leader>s", group = "+search" })
+wk.add({ "<leader>b", group = "+buffers" })
+wk.add({ "<leader>j", group = "+harpoon" })
