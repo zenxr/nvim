@@ -1,7 +1,7 @@
 return {
   "stevearc/conform.nvim",
-  -- disabled
-  cond = false,
+  cond = true, -- enable
+  -- cond = false, -- disable
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = {
@@ -19,9 +19,11 @@ return {
   opts = {
     formatters_by_ft = {
       lua = { "stylua" },
-      python = { "isort", "black" },
+      python = {"ruff_fix" , "ruff_format" },
+      -- python = { "isorr", "black" },
       javascript = { { "prettierd", "prettier" } },
       sql = { "sql_formatter" },
+      xml = { "xmlformat" },
     },
   },
 
