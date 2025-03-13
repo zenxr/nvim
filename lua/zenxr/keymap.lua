@@ -84,9 +84,9 @@ vim.keymap.set("n", '<leader>Y', [["+Y"]], { desc = '[Y]ank eol to sysclip' })
 vim.keymap.set({ 'n', 'v' }, '<leader>p', '"_dP', { desc = '[p]aste without yanking', noremap = true, silent = true })
 
 -- Fugitive
-vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
-vim.keymap.set('n', '<leader>gl', '<cmd>diffget //2<CR>', { noremap = true , desc = 'Diff get left (buf2)'})
-vim.keymap.set('n', '<leader>gr', '<cmd>diffget //3<CR>', { noremap = true , desc = 'Diff get right (buf3)'})
+-- vim.keymap.set('n', '<leader>gg', '<cmd>G<cr>', { desc = 'Fugitive' })
+-- vim.keymap.set('n', '<leader>gl', '<cmd>diffget //2<CR>', { noremap = true , desc = 'Diff get left (buf2)'})
+-- vim.keymap.set('n', '<leader>gr', '<cmd>diffget //3<CR>', { noremap = true , desc = 'Diff get right (buf3)'})
 
 -- Formatting
 vim.keymap.set('n', '<leader>lf', '<cmd>Format<cr>', { desc = 'Format' })
