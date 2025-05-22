@@ -111,3 +111,10 @@ local wk = require("which-key")
 wk.add({ "<leader>s", group = "+search" })
 wk.add({ "<leader>b", group = "+buffers" })
 wk.add({ "<leader>j", group = "+harpoon" })
+wk.add({ "<leader>bc", group = "+cloak" })
+
+-- Cloak toggles
+vim.keymap.set('n', '<leader>bct', '<cmd>CloakToggle<CR>', { desc = 'Cloak [T]oggle' })
+vim.keymap.set('n', '<leader>bce', '<cmd>CloakEnable<CR>', { desc = 'Cloak [E]nable' })
+vim.keymap.set('n', '<leader>bcd', '<cmd>CloakDisable<CR>', { desc = 'Cloak [D]isable' })
+vim.keymap.set('n', '<leader>bcp', '<cmd>CloakPreviewLine<CR>', { desc = 'Cloak [P]review Line' })
