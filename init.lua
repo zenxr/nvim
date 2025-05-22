@@ -401,7 +401,8 @@ local on_attach = function(_, bufnr)
   -- See `:help K` for why this keymap
   -- note pressing K again will go into the popup
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-K>', vim.lsp.buf.signature_help, 'Signature Help')
+  -- removed b/c conflicts with split nav: nmap('<C-K>', vim.lsp.buf.signature_help, 'Signature Help')
+  nmap('<leader>ls', vim.lsp.buf.signature_help, 'LSP signature help')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
