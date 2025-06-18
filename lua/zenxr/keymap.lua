@@ -35,10 +35,10 @@ vim.keymap.set('n', '<leader>sg', '<cmd>Telescope live_grep_args prompt_prefix=r
   { desc = '[S]earch [G]rep' })
 vim.keymap.set('n', '<leader>gfv', '<cmd>vsplit | lua vim.lsp.buf.definition()<cr>', { desc = 'Definition vsplit' })
 vim.keymap.set('n', '<leader>gfh', '<cmd>split | lua vim.lsp.buf.definition()<cr>', { desc = 'Definition split' })
-vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps'})
-vim.keymap.set('n', '<leader>sC', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands'})
-vim.keymap.set('n', '<leader>sz', require('telescope.builtin').colorscheme, { desc = '[S]earch colorschemes'})
-vim.keymap.set('n', '<leader>ti', '<cmd>IBLToggle<cr>', { desc = '[T]oggle [I]BL'})
+vim.keymap.set('n', '<leader>sk', require('telescope.builtin').keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sC', require('telescope.builtin').commands, { desc = '[S]earch [C]ommands' })
+vim.keymap.set('n', '<leader>sz', require('telescope.builtin').colorscheme, { desc = '[S]earch colorschemes' })
+vim.keymap.set('n', '<leader>ti', '<cmd>IBLToggle<cr>', { desc = '[T]oggle [I]BL' })
 
 local new_daily_note = function()
   return os.date("%Y-%m-%d.md")
@@ -101,7 +101,7 @@ local format_selection = function()
     }
   })
 end
-vim.keymap.set('v', '<leader>lf', format_selection, { desc = 'Format selection'})
+vim.keymap.set('v', '<leader>lf', format_selection, { desc = 'Format selection' })
 
 -- Aerial for Treelike symbols layout
 -- vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
