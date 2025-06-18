@@ -68,7 +68,8 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
 vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save', noremap = true })
 
 -- Buffers and tabs
-vim.keymap.set('n', '<leader>gt', '<cmd>tabnext<cr>', { desc = '[G]oto [T]ab' })
+vim.keymap.set('n', '<leader>tb', '<cmd>tabprevious<cr>', { desc = '[T]ab [B]ack' })
+vim.keymap.set('n', '<leader>tn', '<cmd>tabnext<cr>', { desc = '[T]ab [N]ext' })
 vim.keymap.set('n', '<leader>bb', '<cmd>bprev<cr>', { desc = '[B]uffer [B]ack' })
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
