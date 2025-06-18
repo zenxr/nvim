@@ -74,11 +74,6 @@ vim.keymap.set('n', '<leader>bb', '<cmd>bprev<cr>', { desc = '[B]uffer [B]ack' }
 vim.keymap.set('n', '<leader>bn', '<cmd>bnext<cr>', { desc = '[B]uffer [N]ext' })
 vim.keymap.set('n', '<leader>c', '<cmd>bd<cr>', { desc = '[C]lose buffer' })
 
--- Easy Align
-vim.keymap.set('v', '<leader>as', '<Plug>(EasyAlign)*<Space><CR>', { desc = '[A]lign [S]pace' })
-vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [C]omma' })
-vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able' })
-
 -- CLipboard
 vim.keymap.set({ 'n', 'v' }, '<leader>y', '"+y', { desc = '[y]ank to sysclip', noremap = true, silent = true })
 vim.keymap.set("n", '<leader>Y', [["+Y"]], { desc = '[Y]ank eol to sysclip' })
@@ -105,7 +100,6 @@ vim.keymap.set('v', '<leader>lf', format_selection, { desc = 'Format selection' 
 
 -- Aerial for Treelike symbols layout
 -- vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
-vim.keymap.set("n", '<leader>dt', "<cmd>AerialToggle!<CR>", { desc = '[D]ocument Symbol [T]ree' })
 
 -- Just just whichkey titles
 local wk = require("which-key")

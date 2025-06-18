@@ -1,4 +1,5 @@
 return {
+  -- similar to marks, harpoon allows marking frequently visited files for quickly accessing them later
   "ThePrimeagen/harpoon",
   lazy = false,
   dependencies = {

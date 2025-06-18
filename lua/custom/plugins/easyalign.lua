@@ -4,6 +4,8 @@ return {
   lazy = false,
   ft = "md",
   config = function(_)
-    -- todo: move keymappings here
+    vim.keymap.set('v', '<leader>as', '<Plug>(EasyAlign)*<Space><CR>', { desc = '[A]lign [S]pace' })
+    vim.keymap.set('v', '<leader>ac', '<Plug>(EasyAlign)*,<CR>', { desc = '[A]lign [C]omma' })
+    vim.keymap.set('v', '<leader>at', '<Plug>(EasyAlign)*<Bar><CR>', { desc = '[A]lign [T]able' })
   end
 }

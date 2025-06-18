@@ -1,4 +1,5 @@
 return {
+  -- improved, IDE-like, bufferlines (buffer bar text)
   'akinsho/bufferline.nvim',
   lazy = false,
   dependencies = {

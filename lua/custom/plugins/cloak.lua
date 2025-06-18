@@ -1,4 +1,5 @@
 return {
+    -- hides secrets in text files!
     "laytan/cloak.nvim",
     config = function()
         require("cloak").setup({

@@ -1,4 +1,5 @@
 return {
+  -- code formatting plugin
   "stevearc/conform.nvim",
   cond = true, -- enable
   -- cond = false, -- disable

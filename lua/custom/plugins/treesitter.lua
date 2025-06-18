@@ -1,5 +1,6 @@
 return {
   {
+    -- provides highlighting and context via LSP hooks
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     dependencies = {
@@ -78,8 +79,14 @@ return {
     end
   },
   {
+    -- allows hooking into context-aware textobjects (see `textobjects` above)
     'nvim-treesitter/nvim-treesitter-textobjects',
     dependencies = { 'nvim-treesitter' },
     lazy = true,
+  },
+  {
+    -- displays context (e.g class and func name) when deep into a scope
+    "nvim-treesitter/nvim-treesitter-context",
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   }
 }
