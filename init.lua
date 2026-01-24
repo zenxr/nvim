@@ -744,6 +744,7 @@ require('lazy').setup({
             },
           },
         },
+        clojure_lsp = {},
 
         -- nushell = {},
       }
@@ -1001,6 +1002,7 @@ require('lazy').setup({
       ensure_installed = {
         'bash',
         'c',
+        'clojure',
         'cpp',
         'css',
         'diff',

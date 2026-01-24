@@ -14,7 +14,7 @@ return {
         -- alternative, manual install ==> :TSInstall markdown
         ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'json', 'javascript', 'typescript',
           'vimdoc',
-          'vim', 'sql', 'markdown', 'markdown_inline', 'bash', 'css', 'html', 'toml' },
+          'vim', 'sql', 'markdown', 'markdown_inline', 'bash', 'css', 'html', 'toml', 'clojure' },
         sync_install = false,
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = false,
