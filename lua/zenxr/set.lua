@@ -94,3 +94,4 @@ vim.opt.winborder = 'rounded'
 
 vim.opt.spell = false
 vim.opt.spelllang = 'en_us'
+vim.g.python3_host_prog = '/home/code/.virtualenvs/neovim/bin/python'
