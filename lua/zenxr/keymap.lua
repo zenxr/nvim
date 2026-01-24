@@ -111,3 +111,14 @@ vim.keymap.set('n', '<leader>bct', '<cmd>CloakToggle<CR>', { desc = 'Cloak [T]og
 vim.keymap.set('n', '<leader>bce', '<cmd>CloakEnable<CR>', { desc = 'Cloak [E]nable' })
 vim.keymap.set('n', '<leader>bcd', '<cmd>CloakDisable<CR>', { desc = 'Cloak [D]isable' })
 vim.keymap.set('n', '<leader>bcp', '<cmd>CloakPreviewLine<CR>', { desc = 'Cloak [P]review Line' })
+
+-- Conjure (clojure)
+wk.add { '<leader>!', group = '!run' }
+local conjure_start = function()
+  vim.cmd 'Clj'
+  vim.defer_fn(function()
+    vim.cmd('Lazy reload conjure')
+    vim.notify 'Reloaded conjure'
+  end, 5000)
+end
+vim.keymap.set('n', '<leader>!c', conjure_start, { desc = 'Clojure start' })
