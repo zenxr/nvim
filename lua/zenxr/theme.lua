@@ -1,19 +1,18 @@
 -- CATPUCCIN
-require('catppuccin').setup({
+require('catppuccin').setup {
   transparent_background = true,
   styles = {
-    comments = { "italic" },
+    comments = { 'italic' },
   },
   integrations = {
     cmp = true,
     gitsigns = true,
     nvimtree = true,
-    treesitter = true
-  }
-})
+    treesitter = true,
+  },
+}
 vim.cmd.colorscheme 'catppuccin'
 -- CATPUCCIN
-
 
 -- ROSE-PINE
 -- require('rose-pine').setup(
@@ -76,7 +75,6 @@ vim.cmd.colorscheme 'catppuccin'
 -- rose-pine specific, 'cause randomly stolen from primagen's config
 -- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
 -- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
-
 
 -- ROSE-PINE
 

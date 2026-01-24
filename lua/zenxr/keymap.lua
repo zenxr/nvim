@@ -117,7 +117,7 @@ wk.add { '<leader>!', group = '!run' }
 local conjure_start = function()
   vim.cmd 'Clj'
   vim.defer_fn(function()
-    vim.cmd('Lazy reload conjure')
+    vim.cmd 'Lazy reload conjure'
     vim.notify 'Reloaded conjure'
   end, 5000)
 end

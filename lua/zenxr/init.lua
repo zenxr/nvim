@@ -1,3 +1,3 @@
-require("zenxr.set")
-require("zenxr.keymap")
-require("zenxr.theme")
+require 'zenxr.set'
+require 'zenxr.keymap'
+require 'zenxr.theme'

@@ -4,17 +4,36 @@ return {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects'
+      'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
     config = function()
-      require('nvim-treesitter.configs').setup({
+      require('nvim-treesitter.configs').setup {
 
         -- Add languages to be installed here that you want installed for treesitter
         -- alternative, manual install ==> :TSInstall markdown
-        ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'json', 'javascript', 'typescript',
+        ensure_installed = {
+          'c',
+          'cpp',
+          'go',
+          'lua',
+          'python',
+          'rust',
+          'tsx',
+          'json',
+          'javascript',
+          'typescript',
           'vimdoc',
-          'vim', 'sql', 'markdown', 'markdown_inline', 'bash', 'css', 'html', 'toml', 'clojure' },
+          'vim',
+          'sql',
+          'markdown',
+          'markdown_inline',
+          'bash',
+          'css',
+          'html',
+          'toml',
+          'clojure',
+        },
         sync_install = false,
         -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
         auto_install = false,
@@ -75,8 +94,8 @@ return {
             },
           },
         },
-      })
-    end
+      }
+    end,
   },
   {
     -- allows hooking into context-aware textobjects (see `textobjects` above)
@@ -86,7 +105,7 @@ return {
   },
   {
     -- displays context (e.g class and func name) when deep into a scope
-    "nvim-treesitter/nvim-treesitter-context",
+    'nvim-treesitter/nvim-treesitter-context',
     dependencies = { 'nvim-treesitter/nvim-treesitter' },
-  }
+  },
 }

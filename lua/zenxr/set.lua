@@ -4,10 +4,10 @@
 -- The wildmode setting allows you to customize the way that Vim handles
 -- tab-completion at the command prompt.
 -- This is somewhat close to bash
-vim.opt.wildmode = "list:longest,list:full"
+vim.opt.wildmode = 'list:longest,list:full'
 
 -- netrw opens BROWSER rather than system default
-vim.g.netrw_browsex_viewer = os.getenv("BROWSER") or "chromium"
+vim.g.netrw_browsex_viewer = os.getenv 'BROWSER' or 'chromium'
 -- disable netrw file browser for nvim-tree
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
@@ -73,7 +73,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.opt.colorcolumn = "120"
+vim.opt.colorcolumn = '120'
 vim.opt.relativenumber = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
@@ -82,15 +82,15 @@ vim.opt.expandtab = true
 -- vim.opt.smarttab = true
 vim.opt.textwidth = 120
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.opt.foldcolumn = "0"
+vim.opt.foldmethod = 'expr'
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldcolumn = '0'
 -- vim.opt.foldtext = ""
 vim.opt.foldlevel = 99
 vim.opt.foldlevelstart = 9
 vim.opt.foldnestmax = 4
 
-vim.opt.winborder = "rounded"
+vim.opt.winborder = 'rounded'
 
 vim.opt.spell = true
 vim.opt.spelllang = "en_us"

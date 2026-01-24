@@ -5,10 +5,10 @@ return {
   opts = {},
   -- Optional dependencies
   dependencies = {
-    "nvim-treesitter/nvim-treesitter",
-    "nvim-tree/nvim-web-devicons"
+    'nvim-treesitter/nvim-treesitter',
+    'nvim-tree/nvim-web-devicons',
   },
   init = function()
-    vim.keymap.set("n", '<leader>dt', "<cmd>AerialToggle!<CR>", { desc = '[D]ocument Symbol [T]ree' })
-  end
+    vim.keymap.set('n', '<leader>dt', '<cmd>AerialToggle!<CR>', { desc = '[D]ocument Symbol [T]ree' })
+  end,
 }

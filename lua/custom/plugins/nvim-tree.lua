@@ -2,19 +2,19 @@ local HEIGHT_RATIO = 0.8
 local WIDTH_RATIO = 0.5
 
 return {
-  "nvim-tree/nvim-tree.lua",
-  cmd = "NvimTree",
+  'nvim-tree/nvim-tree.lua',
+  cmd = 'NvimTree',
   keys = {
-    { "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "NvimTree" },
+    { '<leader>ft', '<cmd>NvimTreeToggle<cr>', desc = 'NvimTree' },
   },
-  version = "*",
+  version = '*',
   lazy = false,
   dependencies = {
-    "nvim-tree/nvim-web-devicons",
+    'nvim-tree/nvim-web-devicons',
   },
   config = {
     update_focused_file = {
-      enable = true
+      enable = true,
     },
     filters = {
       dotfiles = true,
@@ -22,7 +22,7 @@ return {
     -- re-enabled netrw, against plugin advice
     -- because i like `gx` to open links
     -- disable_netrw = true,
-    -- 
+    --
     -- here down can safely be removed, just fancy floating file tree
     view = {
       float = {
@@ -35,8 +35,7 @@ return {
           local window_w_int = math.floor(window_w)
           local window_h_int = math.floor(window_h)
           local center_x = (screen_w - window_w) / 2
-          local center_y = ((vim.opt.lines:get() - window_h) / 2)
-              - vim.opt.cmdheight:get()
+          local center_y = ((vim.opt.lines:get() - window_h) / 2) - vim.opt.cmdheight:get()
           return {
             border = 'rounded',
             relative = 'editor',
@@ -51,6 +50,5 @@ return {
         return math.floor(vim.opt.columns:get() * WIDTH_RATIO)
       end,
     },
-
-  }
+  },
 }

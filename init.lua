@@ -118,7 +118,6 @@ vim.o.showmode = false
 --   vim.o.clipboard = 'unnamedplus'
 -- end)
 
-
 -- Save undo history
 vim.o.undofile = true
 
@@ -406,7 +405,7 @@ require('lazy').setup({
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
       -- Updated by me, necessary for being able to pass args to grep command (rg)
-      { "nvim-telescope/telescope-live-grep-args.nvim" },
+      { 'nvim-telescope/telescope-live-grep-args.nvim' },
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
