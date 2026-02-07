@@ -94,4 +94,6 @@ vim.opt.winborder = 'rounded'
 
 vim.opt.spell = false
 vim.opt.spelllang = 'en_us'
+
+-- vim.opt.digraph = true <-- ex (i mode ) : P(back)I becomes pi
 vim.g.python3_host_prog = '/home/code/.virtualenvs/neovim/bin/python'

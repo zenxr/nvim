@@ -30,6 +30,16 @@ return {
           end
         end,
       })
+      vim.api.nvim_create_autocmd('User', {
+        group = group,
+        pattern = 'ConjureEval',
+        callback = function()
+          if vim.fn.expand('%:t'):match '^conjure%-log%-' then
+            vim.cmd 'normal! G'
+          end
+        end,
+      })
+      -- autocmd User ConjureEval if expand("%:t") =~ "^conjure-log-" | exec "normal G" | endif
     end,
     -- Optional cmp-conjure integration
     dependencies = { 'PaterJason/cmp-conjure' },
@@ -40,7 +50,7 @@ return {
     dependencies = { 'saghen/blink.compat', 'saghen/blink.cmp' },
     config = function()
       local blink = require 'blink.cmp'
-      blink.add_source_provider('conjure', { module = 'blink.compat.source', name = 'conjure', max_items = 5, score_offset = 5 })
+      blink.add_source_provider('conjure', { module = 'blink.compat.source', name = 'conjure', score_offset = 0 })
       blink.add_filetype_source('clojure', 'conjure')
     end,
   },

@@ -59,10 +59,10 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Split navigation
-vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
+-- vim.keymap.set('n', '<C-h>', '<C-w>h', { noremap = true })
+-- vim.keymap.set('n', '<C-j>', '<C-w>j', { noremap = true })
+-- vim.keymap.set('n', '<C-k>', '<C-w>k', { noremap = true })
+-- vim.keymap.set('n', '<C-l>', '<C-w>l', { noremap = true })
 vim.keymap.set('n', '<C-s>', ':w<cr>', { desc = 'Save', noremap = true })
 
 -- Buffers and tabs
